@@ -4,7 +4,9 @@ package com.wangpx.controller;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.DefaultAlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +17,7 @@ public class PayController {
     private final String APP_ID = "2016101900721571";
     // 应用标识
     // 应用私钥
-    private final String APP_PRIVATE_KEY = "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC9cluy/42Sh5UF2FYQQlC4oEk5RBtdTmPg0YHfzcLZ42jj7fP7h5r59DCKJEz6WGuxCY0dSqLqvtGvEyLrDt01qrPsesAjcWm8w9Q8JIr2dyXADJuVVyu11KpfbOLMI569dbm7TzJTKI9/n1qNQyLpeSkJuZ5oQMk81r/FetUIzzxlC8/hpgbzgdoGUfVhrdNHWtkn5cTv161vTYtPdCI7TnUQUI2C/b/VOQpKF/Ip9gYiHjbG0rc6VByFUJjzgvi6LR8TDWTVH0OuohOQDD0eXjW7MEKIlrmSFSPOvaMHPXC0JE3JCkZjdMo67mE8l52lIZNllPCm1j+tt4FrXGbHAgMBAAECggEAMCxZRw4W2PDjIyZc1CuYzSntFMPN1Y8udKexx9BRwQhDztneVdKoxPCkOyx56pr7X3xXRuCIxvqY5VUPZwhTleb/c53PJ/QZ+Ccv289LCttHXSuXkIUnF0ipvjQ5A8H3BqReA1RjLqQ8wS4rX4p34TivB8sMjeQTiAXvo+7VJzTjNwa1O+aZzPgB1jO46FTrSnl7UDjpRoP1ICa0hYqPLC6V+gRX/ygHxSUwUCReozLQYlHi1wi8RVlIFgIjStAYcDoZ2fTYeu+j69oewEXzD1bvLdX4vYB2eHoxwNFqubHkj3hrYhhFJWj3F4AFFi9O/SXsqvixp/uCGcIFV5TWyQKBgQDn8sKlQ+yVp4IC5vcuAdn03KVeh8tBl5O7mE28rtFAerX9PzjZrRcIb07b0tM402YG8M/Z/PYMIBiW2KdkbPZQAIzWaEmNwB8/YdbisVatRvDCaBAfja4FP5nrHnDXMC9pDE4JN8kyUxP9N6cVG3nMRRszqzapSISEWGDMhBVFiwKBgQDRF1yv3jriKikuY13tHeYILcXvOVjH9U2FO2uSxnCTxApPWGBwa+QPWwYpxonySjxQSLpxmskP9wvNdFeVsCR9F+gstUrUpJUeOQHmQMBLYtVk3383OCb+7yDI11S+xAMqVh0p4GMGDyXCPLqbf9B0Wp50upPpYExiemd627kjNQKBgQCr8sNpUNlqeCthi2diq+ywIYJWecSsc3oJb/bxEYf+jPmtK9kxRaf1kM6dF8WOMulH6+2qZGTiyEhyS1qMkFppJH9D0zvz4aFIk3eBxoXDHvwMoqiRO67uJSAttPtiC06aSYzwOHLm47/F0CQE+cFpNTHdM+fpxuC2W+4mryQ10QKBgC2Wi2Xo7Su8h4gOsD7vwuTLnhlfhoTqbgF7iCPTUl5VYu4T1csNKwdSEFDxccg6+VWD1erJFcd+VLtx/1qqsfn4SW3eBTfBvqV9RnW+bm7BWMeKl0Eh5Ba3ao1/rYF+WTZU2jz0KIL8sH3eIc2fm4KS83N97pv2nBDooUE/QOl1AoGBAN2go6GPnVkeRY/JPk7xrk69EznkqneTRT7TadsvZrz5lok+d5uShtomRTQKwQ63GgUYSmGdUCMIQZsWfAILeIc1uu3BiYIB/BfdDKExfVIS01gwFptK/WDsI6ycrGdT8Q3igXCSg5H7C9oG1Tnv5b5MePvxLk6WqnlLwVXkXs5B";
+    private final String APP_PRIVATE_KEY = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCBSN+0kqWm1/CKfe5he5p/vyXCLBrXL4Dr3yH4DZNpeFg+mV7WmLsgI//M9keb3CaGMVCVtHjSgctVi2DA3vNo3VB5x+eqUYKkOmfnC6X8dJuP4V3UrHJOPkWhSxJb3bC8qo7oBE0F20duXKRW63MjpPRW2IGlMk3+bCNHm+1+ZI+RN1yY8oTnwk1zFqmBf77NubmcCK5sgvBoM/29OT+zVzUuDREOJ8rZjHx+2GgeI/N2Sk1tgF7VV4QEe/fjf9iJQj3Gd/IaZ+su/XlLaS1Dgapg1uQ2DuifeOFLlCCMF4aDuIxn2TACkYKBI8tpd0PEIm0GD7a/LigfJ2bukYCjAgMBAAECggEADZP8wrdAJJS7U6BEQAK+SDpoGcuOChmYHa2yoJ20ZLhZ9EEhX8JsrMR7IiiffrQRa7iUMRTiN6GgHFzmDXuc7t+HizK+lvm2kc78iJyFk00f5W2S8DooSyVpJLaAuBtBa58yIRYKjNnp16JtNB/IWO8DJnfYrePpoxXyYpvyxnpcFcvyzqUlAX1qagbG095neKARqA4AllyDj+JitDciIPBMI+EqrCRNTKt2gxEeVLpsnJ2EJiCLmIYCJqTbI9NHPBrawR4Zdxgb12+XUXCb/1BQio8tP7S2QPHrHm21oIqwWqJDpVNdQGax5Ejip4zoVlW8v9L9CugnTSJz8KSXcQKBgQDj4I/qpSnT+uGwO31ZQafuyx6BFwwSh13v2rPQMkXGmSJ9ESaiz7+OHl7QIfCShKcIeU1Fuc+c/xFHk6B9xOLp62hZ8vgBEikEx+F1Ah/M6mzS4fv+g49sQCuzlgNf9EZ0S62wVz+Z92kWIUcAu3OMG+slTG1T+8PJffVPpJhvyQKBgQCRPW28dxPMA/VonBZmNNzIpRU0IEfTok4HayxlrpaNS6gp4USoSmvnJqNYb4QRVl0RaD+dTka64Ry9oBegVCfPEAfUIbjmUDrsOMm3tF5DOojHLCXsP2MI3QH4xURuFuTJkZ4YvfTfqEz5Jqr0iv6zVWveOYOOxEN+wPe7dKabCwKBgCZtvFdpuwAQkvbRUXY36EYQ4vgKFvMY+PJ2A1Tc5X90W6iTt9xFBJzG6l5XGubakACR1EIp76UeLp/PeYU8KrggBt0EaGZl1Z0EyDSfQxWfgvKdQY3OSeWLfNMwPSl1XFxIVuYiEIu6eXJN8ldhRT8fhiwoE1fSYVYdc70WmM5hAoGAYwUXcLtacuhsAwMPvmTh9aWfHCe58I6iVip6XWS3XeOr5cmgboA2qqRMDzoQN2XDE+AYJt48GKLrXljsYrGdZm1OeRD4p4UhdvWMiUNeVMVuhSQTQstAcMWE159edRQErWwq9kFj1qw+tkrnmMu+tHNTlHFvwQEL5zoWa+YuxFsCgYBsgAeZwdyal7/x2Tmt7wVWNjSwcETJ5AUYW0M1z3LLJHUShGZWRo1eyzDUC3Bpg8otn8kKwsSEP2AC3hfoNnkn6le3rveqdnIH+qOknNuP4KuoqTGEmyGkH1pV4DL4I7/g5EL46CB7jeDclAua9OLSCCYKMXEL6AfErDFrkz56iA==";
     // 编码格式
     private final String CHARSET = "UTF-8";
     // 支付宝公钥
@@ -31,8 +33,8 @@ public class PayController {
     // 支付宝同步通知路径，也就是当付款完毕后跳转本项目的页面，可以不是公网地址
     private final String RETURN_URL = "http://127.0.0.1/returnURL";
 
-    @RequestMapping("/alipay")
-    public void aliPay(HttpServletResponse response,double money) throws Exception {
+    @RequestMapping(value = "/alipay",method = RequestMethod.GET)
+    public void aliPay(HttpServletResponse response, double money)  {
 
 
 
@@ -47,28 +49,29 @@ public class PayController {
 
         //生成商户订单号
         String orderId = UUID.randomUUID().toString();
-        //付款金额，必填
+
         String total_amount =Double.toString(money);
-        //订单名称，必填
+
         String subject = "测试支付";
         request.setBizContent("{\"orderId\":\""+ orderId +"\","
                 + "\"total_amount\":\""+ total_amount +"\","
-                + "\"subject\":\""+ subject +"\","
-                + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
+                + "\"subject\":\""+ subject +"\"");
         String form="";
 
         try {
             //
             form = alipayClient.pageExecute(request).getBody();
+
+            response.setContentType("text/html;charset=" + CHARSET);
+            response.getWriter().write(form);// 直接将完整的表单html输出到页面
+            response.getWriter().flush();
+            response.getWriter().close();
         } catch (Exception e) {
             e.printStackTrace();
 
         }
 
-        response.setContentType("text/html;charset=" + CHARSET);
-        response.getWriter().write(form);// 直接将完整的表单html输出到页面
-        response.getWriter().flush();
-        response.getWriter().close();
+
 
 
     }

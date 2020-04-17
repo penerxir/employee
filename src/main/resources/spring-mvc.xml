@@ -27,6 +27,6 @@
     <mvc:resources mapping="/front/**" location="/front/"></mvc:resources>
 
 
-    <bean id="exceptionResolver" class="com.luo.exceptionresolver.MySimpleMappingExceptionResolver"></bean>
+    <bean id="exceptionResolverController" class="com.wangpx.controller.ExceptionHandlerController"></bean>
 
 </beans>
