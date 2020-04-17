@@ -1,6 +1,7 @@
 package com.wangpx.controller;
 
 
+import com.wangpx.exception.MyException;
 import com.wangpx.pojo.Employee;
 import com.wangpx.service.EmployeeService;
 import org.apache.log4j.Logger;
@@ -20,42 +21,42 @@ public class EmployeeController {
 
     private static Logger logger=Logger.getLogger(EmployeeController.class);
     @RequestMapping(value = "/getEmp",method = RequestMethod.GET)
-    public List<Employee> getEmp() {
+    public List<Employee> getEmp() throws MyException {
         List<Employee> emp = employeeService.getEmp();
         if (emp !=null) {
             //logger.debug(emp);
             return emp;
         }
-        throw new RuntimeException("没有找到员工信息");
+        throw new MyException("没有找到员工信息");
 
 
     }
 
     @RequestMapping(value = "/ins" , method = RequestMethod.PUT)
-    public int insEmp(Employee employee) {
+    public int insEmp(Employee employee) throws MyException {
         int i = employeeService.insEmp(employee);
         if (i>0) {
             return i;
         }
-        throw new RuntimeException("添加失败");
+        throw new MyException("添加失败");
     }
 
     @RequestMapping(value = "/del",method = RequestMethod.DELETE)
-    public int delEmp(Integer id) {
+    public int delEmp(Integer id) throws MyException {
         int i = employeeService.delEmp(id);
         if (i>0) {
             return i;
         }
-        throw new RuntimeException("删除失败");
+        throw new MyException("删除失败");
     }
 
     @RequestMapping(value = "/upda",method = RequestMethod.POST)
-    public int upEmp(Employee employee) {
+    public int upEmp(Employee employee) throws MyException {
         int i = employeeService.update(employee);
         if (i>0) {
             return i;
         }
-        throw new RuntimeException("修改失败");
+        throw new MyException("修改失败");
     }
 
 }

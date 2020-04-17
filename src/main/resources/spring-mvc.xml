@@ -26,4 +26,7 @@
     <mvc:resources mapping="/static/**" location="/static/"></mvc:resources>
     <mvc:resources mapping="/front/**" location="/front/"></mvc:resources>
 
+
+    <bean id="exceptionResolver" class="com.luo.exceptionresolver.MySimpleMappingExceptionResolver"></bean>
+
 </beans>

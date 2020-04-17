@@ -165,6 +165,12 @@
       <version>${slf4j.version}</version>
     </dependency>
 
+
+    <dependency>
+      <groupId>com.alipay.sdk</groupId>
+      <artifactId>alipay-sdk-java</artifactId>
+      <version>3.3.49.ALL</version>
+    </dependency>
     <!-- log end -->
     <!-- 映入JSON -->
     <dependency>
