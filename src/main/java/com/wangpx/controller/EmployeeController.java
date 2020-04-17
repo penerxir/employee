@@ -3,6 +3,7 @@ package com.wangpx.controller;
 
 import com.wangpx.pojo.Employee;
 import com.wangpx.service.EmployeeService;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,10 +18,12 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
 
+    private static Logger logger=Logger.getLogger(EmployeeController.class);
     @RequestMapping(value = "/getEmp",method = RequestMethod.GET)
     public List<Employee> getEmp() {
         List<Employee> emp = employeeService.getEmp();
         if (emp !=null) {
+            //logger.debug(emp);
             return emp;
         }
         throw new RuntimeException("没有找到员工信息");
