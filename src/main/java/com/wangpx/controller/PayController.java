@@ -36,67 +36,13 @@ public class PayController {
     private final String RETURN_URL = "http://127.0.0.1/alipay";
 
 
-   /* // 应用标识
-    private final String APP_ID = "2016101900725971";
-    // 应用私钥
-    private final String APP_PRIVATE_KEY = "MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCLtZ7jH8hwsjHCMELHQPlG7BRksdG4EvdDpQb+mmJCwuCv8BPD3C8aXgDqVf5qJ8KyOlC9YJDRoBh2/9hl+kIkpNLA7bqcGJIH6uO9mY/J/GK0DqgdtceDoki1VmrTmDoIGJu1hQFFxZdWsvRX8SVvngLrbKoBqkBFkmNUIMtcGUfOPJ3Q7lKZ4K/2sXd6gIYYnCo/Ka4nBYVGzMCYYBU8cxWpADNvXghpMtbZ5wdTg8CwOgmte/LvlMqxHFsrMiLaAmBELVD4ysS/qhAYhU/IcFRnYMLSoFHY/Wg3apprg7ubHO50jas5KC5aveDzUnOFDdbG81pkjsWkGzASxSOTAgMBAAECggEAF9Beg/Jv9R26s5IMX/BoTTmChGN3DvxUn3gqyA1CwIR9TiALDnCiqsjpOQhtdGTQoBammpEyPjke0nHrzf4pdhuOPQqIq4DYq3bTWQcq5lAZ9v0klOPeXUa1RAu169lf0u924ysHu3/huwqH8dGOAweZEc4U8HG3wOQiAD4Sy+DWpK75xopz2XMIHxzqwP5xPTwBkl1lIQOJnEPWV+V/juaE2ng3mBfc9dAGC6q7Xq1GK4QYMKoIsX+1kbRe6rUEIFiAQMNUL7CF/eHJHrzRvPfCYoDkWhjayDVgNnVm2CarIJFZhdv5v3uy1DTmQC3hFagSP2RbKkW21iGvEH0veQKBgQDLE1G+/vfTNQCrUXC0m/4fV51pgmix0eUu+b6TtoGo67rT0ryuQgLlg/NK7QLHF/4isO1LQ4OWI+EYbAAd7kbiYH8diiR99fdy9CoRPmtkz28Ii/P8a1OS8U3wDWq2hG8AhAzjzoZRRUVQ5duT9JZGSmLwe6qWxL+18zY0Wcy1fwKBgQCwHq5/c+5sDgY60RdgiV7CyzuxNuBkkfoqt+eXyzVEIjKRbRkxKIKY5l8bF3m7+N22LdBtuwVHeJ7XP2fNs6C7NQBBnuNVhRzAT9MozM+ieEWUUCHXaGUhsk8wBtrCM+h+4hGe6dPAoYOd9QoHB3x2exrq48G0XtIJtpyV7G9j7QKBgEbNy5iuSTYIqt0Qnh06rlW7NJUO9PXa2u+QABR8c6Sz3AXy2fpf5aakZPVgwbEs+lyaF4JAXebBR8A+F6RX6bsQLgHconCQi+A2pVwxyTvy3yG5ui3uNctr+uKRqv1MG2+wmtXqsgYwAsT7/50MkECduvViCM5cdwM3c1S5Yph9AoGALn+7RI1AOqktPeQsjuFV8ooj9XLupb7g1Nx/OdV998IrpbevOgpfCK1yGL4G9vkK2GmaKQ6Co08WaPAloOq3GhYxPiIMFW0ynRe2QYRpoZStki3h8XRvlwjz3VNB+Jop3S4kxtcngClkjZS/lAGG++UewztkzhFm1QewqeiltDUCgYAuMpN9hnxGO0K8a/Szh2SXnEyCXdpz9jr7vVsuf2PBvk2YPzTPkWPeecZaE7nsg1y25KbV4YqM0LtDy+QG6b7V0G3KCSqtALIQu+2eYj5brl49YexH1x9An7AXpLE2oUU0EdkOL9LRbPKgXi9/Hc6lxqJ12jlMxI3JTHWKLaf9tg==";
-    // 编码格式
-    private final String CHARSET = "UTF-8";
-    // 支付宝公钥
-    private final String ALIPAY_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAhjkdyo6Gc9wtlLUMItgLyJhCVc1aUO+IaU9kHbKqbdIx/ZXhuYn1fJFpW5/IM8RRgQhP9eZVpUGyE01lxf3b2XU7SsTJ8ub649cNAO1+2c4fnCUbltihzzQwA39vFLgD+F2d7klLhEF0Ju7RYtG4n0vvi9tUoHi0PCJJoEEFIPpM4vgMQLVdV7jyZ/ztnvvOQAO/p4DFXKGW15mcI7wSHRpjp4kKxW58xc6R70PA1dYp92EDNe3ufZA/uYig1RbNwdj7WBHf0UGZlvbPaaN+k9/ftBrPX1ywIUVooMj7prWUKg9j8FZDCXnxDRuBCpS7TcSzvR77ABwOxeHMn2FOJwIDAQAB";
-    // 沙箱路径接口，正是路径应为https://openapi.alipay.com/gateway.do
-    private final String GATEWAY_URL = "https://openapi.alipaydev.com/gateway.do";
-    // 参数返回格式
-    private final String FORMAT = "JSON";
-    // 签名方式
-    private final String SIGN_TYPE = "RSA2";
-    // 支付宝异步通知路径，付款完毕后会异步调用本项目的方法，必须为公网地址
-    private final String NOTIFY_URL = "http://127.0.0.1/notifyURL";
-    // 支付宝同步通知路径，也就是当付款完毕后跳转本项目的页面，可以不是公网地址
-    private final String RETURN_URL = "http://127.0.0.1:8888/pay2/sxt/PayPage2";*/
 
     @RequestMapping(value = "/alipay",method = RequestMethod.GET)
     public void aliPay(HttpServletResponse httpResponse, double money)  {
 
 
 
-        /*//创建客户端
-        AlipayClient alipayClient = new DefaultAlipayClient(
-                GATEWAY_URL,APP_ID,APP_PRIVATE_KEY,FORMAT,CHARSET,ALIPAY_PUBLIC_KEY,SIGN_TYPE
-        );
-        AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
 
-        request.setReturnUrl(RETURN_URL);
-        request.setNotifyUrl(NOTIFY_URL);
-
-        //生成商户订单号
-        String orderId = UUID.randomUUID().toString();
-
-        String total_amount =Double.toString(money);
-
-        String subject = "测试支付";
-        String body = "尊敬的会员欢聘用 金牌支持  家沐 竭尽为您服";
-        request.setBizContent("{\"orderId\":\""+ orderId +"\","
-                + "\"total_amount\":\""+ total_amount +"\","
-                + "\"subject\":\""+ subject +"\","
-                + "\"body\":\""+ body +"\","
-                + "\"product_code\":\"FAST_INSTANT_TRADE_PAY\"}");
-        String form="";
-
-        try {
-            //
-            form = alipayClient.pageExecute(request).getBody();
-
-            response.setContentType("text/html;charset=" + CHARSET);
-            response.getWriter().write(form);// 直接将完整的表单html输出到页面
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (Exception e) {
-            e.printStackTrace();
-
-        }*/
-        // 实例化客户端,填入所需参数
-        // 网关地址 应用标识 应用私钥 传输格式 编码格式 支付宝公钥 签名类型
         AlipayClient alipayClient = new DefaultAlipayClient(GATEWAY_URL, APP_ID, APP_PRIVATE_KEY, FORMAT, CHARSET, ALIPAY_PUBLIC_KEY, SIGN_TYPE);
 
         AlipayTradePagePayRequest request = new AlipayTradePagePayRequest();
