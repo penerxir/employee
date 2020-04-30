@@ -1,14 +1,21 @@
 package com.wangpx.pojo;
 
+
 import java.io.Serializable;
 import java.util.Objects;
 
 public class Employee implements Serializable {
 
     private Integer id;
+   /* @Pattern(regexp = "^(?:[1-9][0-9]?|1[01][0-9]|120)$",message = "年龄格式错误")
+    @NotBlank(message = "年龄不能为空")*/
     private Integer age;
+   /* @NotBlank(message = "姓名不能为空")
+    @Pattern(regexp = "^([\\u4E00-\\u9FA5]+|[a-zA-Z]+)$",message = "姓名格式错误")*/
     private String name;
+   /* @NotBlank(message = "地址不能为空")*/
     private String address;
+   /* @NotBlank(message = "性别不能为空")*/
     private Integer gender;
 
     @Override

@@ -2,6 +2,7 @@ package com.wangpx.mapper;
 
 import com.wangpx.pojo.Employee;
 import org.apache.ibatis.annotations.*;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -20,4 +21,8 @@ public interface EmployeeMapper {
 
     @Update("update employee set name=#{name},address=#{address},gender=#{gender} where id =#{id} ")
     int update(Employee employee);
+
+
+    @Select("select * from employee by id =#{id}")
+    Employee getEmpById(@Param("id") Integer id);
 }
